@@ -1,21 +1,14 @@
-FROM rust:latest AS rust
-
-# https://vfoley.xyz/rust-compilation-tip/
-ENV RUSTFLAGS="-C target-cpu=native" 
-
-RUN cargo install lychee
-
-# production image
-FROM ubuntu:impish
+FROM golang:1.17
 
 LABEL maintainer="T145" \
       version="1.0.0" \
       description="An unstable image used to experiment with Docker."
 
-COPY --from=rust /usr/local/cargo/ /usr/local/
-# COPY --from=rust /usr/local/rustup/ /usr/local/
-
-ENV PATH=/usr/local/cargo/bin:$PATH
-
-# Copying from the latest Docker image should mean `rustup` doesn't need to be copied and executed.
-# RUN rustup update
+# https://github.com/projectdiscovery/httpx#usage
+# https://github.com/projectdiscovery/dnsx#usage
+# https://github.com/ipinfo/cli#-ipinfo-cli
+# https://github.com/StevenBlack/ghosts#ghosts
+RUN go install github.com/projectdiscovery/dnsx/cmd/dnsx@latest \
+    && go install github.com/projectdiscovery/httpx/cmd/httpx@latest \
+    && go install github.com/ipinfo/cli/ipinfo@latest
+    # && go install github.com/StevenBlack/ghosts@latest
