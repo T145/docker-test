@@ -17,9 +17,9 @@ LABEL maintainer="T145" \
       description="An unstable image used to experiment with Docker."
 
 COPY --from=go /usr/local/go/ /usr/local/
-COPY --from=go /go /root
+COPY --from=go /go /root/
 
-RUN mv /root/go /
+RUN mv /root/go/ /
 
 # set go env path
 # https://www.digitalocean.com/community/tutorials/how-to-install-go-and-set-up-a-local-programming-environment-on-ubuntu-18-04
