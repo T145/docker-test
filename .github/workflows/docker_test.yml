@@ -19,4 +19,4 @@ jobs:
       
       - name: Scan with snscrape
         run: |
-          snscrape --max-results 100 twitter-hashtag archiveteam
+          snscrape --jsonl twitter-user Certego_Intel
